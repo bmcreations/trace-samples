@@ -1,5 +1,5 @@
 [versions]
-trace = "0.5.4"
+trace = "0.6.0"
 kotlin = "2.3.10"
 android-gradle = "8.13.2"
 compose-plugin = "1.10.1"
