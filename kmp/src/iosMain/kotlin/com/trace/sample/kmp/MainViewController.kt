@@ -5,7 +5,7 @@ import com.trace.sdk.Trace
 import com.trace.sdk.TraceConfig
 
 fun MainViewController() =
-    ComposeUIViewController(configure = { enforceStrictPlistSanityCheck = false }) {
+    ComposeUIViewController {
         SampleTheme {
             AppNavigation()
         }

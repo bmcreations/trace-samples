@@ -52,6 +52,7 @@ fun LoginScreen(onLogin: () -> Unit) {
 
 @Composable
 fun HomeScreen(
+    attributionMethod: String? = null,
     onProductClick: (String) -> Unit,
     onCheckout: () -> Unit,
     onLogout: () -> Unit
@@ -68,6 +69,30 @@ fun HomeScreen(
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
+
+        if (attributionMethod != null) {
+            Spacer(Modifier.height(12.dp))
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.secondaryContainer
+                )
+            ) {
+                Column(Modifier.padding(12.dp)) {
+                    Text(
+                        "Attribution",
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer
+                    )
+                    Text(
+                        attributionMethod,
+                        style = MaterialTheme.typography.titleSmall,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer
+                    )
+                }
+            }
+        }
+
         Spacer(Modifier.height(32.dp))
 
         Button(onClick = { onProductClick("abc123") }, Modifier.fillMaxWidth()) {

@@ -4,6 +4,7 @@ import com.trace.sdk.AttributionResult
 import com.trace.sdk.DeepLink
 import com.trace.sdk.Trace
 import com.trace.sdk.TraceConfig
+import com.trace.sdk.test.TestModeConfig
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.withTimeout
@@ -77,6 +78,27 @@ class SdkIntegrationTest {
 
         // Deep link listener should NOT have been called
         assertFalse(deepLinkCalled)
+    }
+
+    @Test
+    fun clipboardMethodSimulatedCorrectly() = runTest {
+        val received = CompletableDeferred<AttributionResult>()
+
+        Trace.setAttributionListener { result -> received.complete(result) }
+        Trace.initialize(config = TraceConfig(
+            apiKey = "test_key",
+            hashSalt = buildString { repeat(64) { append("0") } },
+            debug = true,
+            testMode = TestModeConfig(
+                simulatedMethod = "CLIPBOARD",
+                simulatedCampaignId = "clipboard_campaign",
+            ),
+        ))
+
+        val result = withTimeout(5.seconds) { received.await() }
+        assertIs<AttributionResult.Attributed>(result)
+        assertEquals("CLIPBOARD", result.method)
+        assertEquals("clipboard_campaign", result.campaignId)
     }
 
     @Test

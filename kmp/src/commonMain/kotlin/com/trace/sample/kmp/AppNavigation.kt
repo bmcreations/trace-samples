@@ -12,6 +12,8 @@ import androidx.navigation3.runtime.rememberNavBackStack
 import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import androidx.savedstate.serialization.SavedStateConfiguration
+import com.trace.sdk.AttributionResult
+import com.trace.sdk.compose.LocalTrace
 import com.trace.sdk.compose.TraceProvider
 import com.trace.sdk.compose.rememberDeepLinkMapper
 import com.trace.sdk.nav3.navigateReplacing
@@ -48,6 +50,9 @@ fun AppNavigation() {
     }
 
     TraceProvider {
+        val attribution by LocalTrace.current.attribution.collectAsState()
+        val attributionMethod = (attribution as? AttributionResult.Attributed)?.method
+
         NavDisplay(
             modifier = Modifier.systemBarsPadding(),
             backStack = backStack,
@@ -81,6 +86,7 @@ fun AppNavigation() {
 
                 entry<HomeRoute> {
                     HomeScreen(
+                        attributionMethod = attributionMethod,
                         onProductClick = { id -> backStack.add(ProductRoute(id)) },
                         onCheckout = { backStack.add(CheckoutRoute()) },
                         onLogout = {
