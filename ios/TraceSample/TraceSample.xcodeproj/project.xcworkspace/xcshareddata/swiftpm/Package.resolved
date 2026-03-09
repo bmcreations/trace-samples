@@ -1,0 +1,15 @@
+{
+  "originHash" : "4179869677e70029f6aedd379a6747798072061c1e9ae5f81a8f6ab193d4ab8a",
+  "pins" : [
+    {
+      "identity" : "trace-sdk-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/bmcreations/trace-sdk-ios",
+      "state" : {
+        "revision" : "4213997c3120e606aa9712375427c09b4189ae20",
+        "version" : "0.7.2"
+      }
+    }
+  ],
+  "version" : 3
+}
