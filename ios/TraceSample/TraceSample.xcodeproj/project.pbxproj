@@ -359,7 +359,7 @@
 			repositoryURL = "https://github.com/bmcreations/trace-sdk-ios";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.7.2;
+				minimumVersion = 0.7.8;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
